@@ -11,6 +11,7 @@ namespace Bearlikelion\TwigRecaptcha;
 class Extension extends \Twig_Extension
 {
 	public $Captcha;
+	private static $instance;
 
 	public function __construct(Array $keys)
 	{
@@ -41,5 +42,11 @@ class Extension extends \Twig_Extension
 	public function getName()
 	{
 		return 'captcha_extension';
+	}
+
+	public static function singleton()
+	{
+		if (!isset(self::$instance)) self::$instance = new self;
+		return self::$instance->Captcha;
 	}
 }
